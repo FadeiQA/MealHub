@@ -28,7 +28,7 @@ export default {
     },
   },
   mounted() {
-    this.$axios.get(`/api/comments/${this.$route.params.id}`)
+    this.$axios.get(`/comments/${this.$route.params.id}`)
       .then((result) => {
         this.commentData = result.data
       })

@@ -20,7 +20,7 @@ export default {
     },
   },
   mounted() {
-    this.$axios.get("/api/comments")
+    this.$axios.get("/comments")
       .then((result) => {
         this.comments = result.data
       })
