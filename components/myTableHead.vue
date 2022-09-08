@@ -1,13 +1,20 @@
 <template>
-$END$
+  <thead>
+  <tr>
+    <th @click="$emit(`click`, id)" v-for="(column, id) in columns" :key="id"> {{ column }} </th>
+  </tr>
+  </thead>
 </template>
 
 <script>
 export default {
-name: "myTableHead"
+  name: "MyTableHead",
+  props: {
+    columns: {
+      type: Array,
+      default: () => []
+    }
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
