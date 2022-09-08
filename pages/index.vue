@@ -1,5 +1,9 @@
 <template>
-  <my-table :config="tableConfig" :data="comments" @click="goToComment"></my-table>
+  <my-table
+    :config="tableConfig"
+    :data="comments"
+    @click="goToComment"
+  ></my-table>
 </template>
 
 <script>
@@ -7,29 +11,27 @@ export default {
   name: 'IndexPage',
   data() {
     return {
-      comments: []
+      comments: [],
     }
   },
   computed: {
     tableConfig() {
       return {
-        "id": "id",
-        "name": "Имя",
-        "email": "Почта",
+        id: 'id',
+        name: 'Имя',
+        email: 'Почта',
       }
     },
   },
   mounted() {
-    this.$axios.get("/comments")
-      .then((result) => {
-        this.comments = result.data
-      })
+    this.$axios.get('/comments').then((result) => {
+      this.comments = result.data
+    })
   },
   methods: {
     goToComment(e) {
       this.$router.push(`/${e.id}`)
-    }
-  }
+    },
+  },
 }
-
 </script>

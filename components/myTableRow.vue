@@ -1,23 +1,22 @@
 <template>
   <tr @click="log">
-    <td v-for="(column, id) in columns" :key="id"> {{ column }} </td>
+    <td v-for="(column, id) in columns" :key="id">{{ column }}</td>
   </tr>
 </template>
 
 <script>
 export default {
-  name: "MyTableRow",
+  name: 'MyTableRow',
   props: {
     columns: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   methods: {
     log() {
       this.$emit('click', '')
-    }
-  }
+    },
+  },
 }
 </script>
-

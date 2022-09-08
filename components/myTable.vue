@@ -1,40 +1,52 @@
 <template>
   <div class="bd-example">
     <table class="table">
-    <my-table-head @click="sort" :columns="tableHead"></my-table-head>
+      <my-table-head :columns="tableHead" @click="sort"></my-table-head>
       <tbody>
-        <my-table-row v-for="(row, keyRow) in tableRows" :columns="row.row" :key="keyRow" @click="goToDetails(row)"></my-table-row>
+        <my-table-row
+          v-for="(row, keyRow) in tableRows"
+          :key="keyRow"
+          :columns="row.row"
+          @click="goToDetails(row)"
+        ></my-table-row>
       </tbody>
-
     </table>
-    <div style="display: flex; flex-wrap: wrap;">
-      <span v-for="number in Math.ceil(data.length / 10)" :key="`number${number}`" @click="changePage(number)" :style="{background: +number - 1 === +page ? 'pink' : '', padding: '5px'}">{{number}}</span>
+    <div style="display: flex; flex-wrap: wrap">
+      <span
+        v-for="number in Math.ceil(data.length / 10)"
+        :key="`number${number}`"
+        :style="{
+          background: +number - 1 === +page ? 'pink' : '',
+          padding: '5px',
+        }"
+        @click="changePage(number)"
+        >{{ number }}</span
+      >
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "MyTable",
+  name: 'MyTable',
   props: {
     config: {
       type: Object,
       default: () => ({
-        "id": "id",
-        "name": "Имя",
-        "email": "Почта",
-      })
-
+        id: 'id',
+        name: 'Имя',
+        email: 'Почта',
+      }),
     },
     data: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   data() {
     return {
       sortBy: { key: '', direction: 'desc' },
-      page: 0
+      page: 0,
     }
   },
   computed: {
@@ -54,10 +66,12 @@ export default {
         return this.sortBy.direction === 'asc' ? -1 : 1
       })
 
-      return items.map(item => {
-        return { meta: item, row: keys.map((key) => item[key]) }
-      }).slice(this.page * 10, this.page * 10 + 10)
-    }
+      return items
+        .map((item) => {
+          return { meta: item, row: keys.map((key) => item[key]) }
+        })
+        .slice(this.page * 10, this.page * 10 + 10)
+    },
   },
   methods: {
     sort(byKey) {
@@ -74,9 +88,7 @@ export default {
     },
     goToDetails(row) {
       this.$emit('click', row.meta)
-    }
-  }
-
+    },
+  },
 }
 </script>
-
