@@ -1,7 +1,7 @@
 <template>
   <div class="bd-example">
     <table class="table">
-    <my-table-head @click="log" :columns="tableHead"></my-table-head>
+    <my-table-head @click="sort" :columns="tableHead"></my-table-head>
       <tbody>
         <my-table-row v-for="(row, keyRow) in tableRows" :columns="row.row" :key="keyRow" @click="goToDetails(row)"></my-table-row>
       </tbody>
@@ -60,14 +60,14 @@ export default {
     }
   },
   methods: {
-    log(asd) {
+    sort(byKey) {
       const entries = Object.entries(this.config)
-      if (this.sortBy.key === entries[asd][0]) {
+      if (this.sortBy.key === entries[byKey][0]) {
         this.sortBy.direction = this.sortBy.direction === 'asc' ? 'desc' : 'asc'
       } else {
         this.sortBy.direction = 'desc'
       }
-      this.sortBy.key = entries[asd][0]
+      this.sortBy.key = entries[byKey][0]
     },
     changePage(number) {
       this.page = +number - 1
